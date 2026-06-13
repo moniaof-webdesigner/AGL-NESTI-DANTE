@@ -35,6 +35,11 @@ exatamente nesta ordem:
 | J      | Origem              | Como conheceu a Nesti Dante                              |
 | K      | Origem do Site      | Domínio de onde o formulário foi enviado                 |
 | L      | Data Envio (ISO)    | Data/hora enviada pelo navegador (ISO 8601)              |
+| M      | UTM Source          | `utm_source` capturado da URL (ex.: `google`, `facebook`) |
+| N      | UTM Medium          | `utm_medium` capturado da URL (ex.: `cpc`, `paid-social`) |
+| O      | UTM Campaign        | `utm_campaign` capturado da URL                          |
+| P      | UTM Content         | `utm_content` capturado da URL                           |
+| Q      | UTM Term            | `utm_term` capturado da URL                              |
 
 > Dica: deixe a primeira linha em negrito e congele-a (Exibir → Congelar →
 > 1 linha) para facilitar a leitura.
@@ -82,7 +87,12 @@ function doPost(e) {
       params.premium || '',             // I - Premium/Importados
       params.origem || '',              // J - Origem
       params.origemSite || '',          // K - Origem do Site
-      params.dataEnvio || ''            // L - Data Envio (ISO, do navegador)
+      params.dataEnvio || '',           // L - Data Envio (ISO, do navegador)
+      params.utm_source || '',          // M - UTM Source
+      params.utm_medium || '',          // N - UTM Medium
+      params.utm_campaign || '',        // O - UTM Campaign
+      params.utm_content || '',         // P - UTM Content
+      params.utm_term || ''             // Q - UTM Term
     ];
 
     sheet.appendRow(row);

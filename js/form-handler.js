@@ -22,8 +22,55 @@
     WHATSAPP_NUMBER: '5527992750016'
   };
 
+  /* ---------------------------------------------------------
+     Captura de UTMs (tráfego pago: Meta Ads / Google Ads)
+     ---------------------------------------------------------
+     Lê os parâmetros utm_* da URL assim que a página carrega e
+     guarda em sessionStorage, para que continuem disponíveis
+     mesmo que o usuário navegue pela página antes de abrir o
+     pop-up. Os valores são gravados nos campos ocultos do
+     formulário logo abaixo.
+     --------------------------------------------------------- */
+  var UTM_FIELDS = ['utm_source', 'utm_medium', 'utm_campaign', 'utm_content', 'utm_term'];
+
+  function captureUTMs() {
+    var params = new URLSearchParams(window.location.search);
+
+    UTM_FIELDS.forEach(function (key) {
+      var value = params.get(key);
+
+      if (value) {
+        try {
+          window.sessionStorage.setItem(key, value);
+        } catch (e) {
+          /* sessionStorage indisponível (ex.: navegação privada) */
+        }
+      }
+    });
+  }
+
+  function fillUTMFields(form) {
+    UTM_FIELDS.forEach(function (key) {
+      var field = form.querySelector('[name="' + key + '"]');
+      if (!field) return;
+
+      var value = '';
+      try {
+        value = window.sessionStorage.getItem(key) || '';
+      } catch (e) {
+        value = '';
+      }
+
+      field.value = value;
+    });
+  }
+
+  captureUTMs();
+
   var form = document.getElementById('partnershipForm');
   if (!form) return;
+
+  fillUTMFields(form);
 
   var submitBtn = document.getElementById('submitBtn');
   var feedbackEl = document.getElementById('formFeedback');
@@ -287,6 +334,12 @@
       }
       return;
     }
+
+    // Inclui as UTMs capturadas da URL no pacote enviado à planilha
+    UTM_FIELDS.forEach(function (key) {
+      var field = form.querySelector('[name="' + key + '"]');
+      result.data[key] = field ? field.value : '';
+    });
 
     var gasConfigured = CONFIG.GAS_WEB_APP_URL && CONFIG.GAS_WEB_APP_URL.indexOf('COLE_AQUI') !== 0;
 
