@@ -36,6 +36,9 @@
   <link rel="stylesheet" href="css/style.css">
   <link rel="stylesheet" href="css/responsive.css">
 
+  <!-- AOS - Animate On Scroll -->
+  <link rel="stylesheet" href="https://unpkg.com/aos@2.3.4/dist/aos.css">
+
   <!-- Structured Data: Organization -->
   <script type="application/ld+json">
   {
@@ -112,11 +115,11 @@
       </div>
 
       <div class="container hero__content">
-        <p class="hero__eyebrow">— Distribuidora Oficial Nesti Dante no Brasil</p>
-        <h1 class="hero__title">Eleve o padrão do seu portfólio com a excelência florentina.</h1>
-        <p class="hero__subtitle">
+        <p class="hero__eyebrow" data-aos="fade-up">— Distribuidora Oficial Nesti Dante no Brasil</p>
+        <h1 class="hero__title" data-aos="fade-up" data-aos-delay="150">Eleve o padrão do seu portfólio com a excelência florentina.</h1>
+        <p class="hero__subtitle" data-aos="fade-up" data-aos-delay="300">
           Conecte sua empresa à verdadeira tradição da perfumaria italiana. Distribuição exclusiva Nesti Dante no Brasil: originalidade e prestígio garantidos para o seu ponto de venda.</p>
-        <div class="hero__actions">
+        <div class="hero__actions" data-aos="fade-up" data-aos-delay="450">
           <button type="button" class="btn btn--primary btn--lg" data-open-modal>
             TORNE-SE UM PARCEIRO
           </button>
@@ -127,7 +130,7 @@
     <!-- ===================== FAIXA DE AUTORIDADE ===================== -->
     <section class="stats" aria-label="Números que comprovam nossa tradição no mercado">
       <div class="container stats__grid">
-        <div class="stats__item">
+        <div class="stats__item" data-aos="fade-up">
           <div class="stats__icon" aria-hidden="true">
             <svg viewBox="0 0 48 48" fill="none" xmlns="http://www.w3.org/2000/svg">
               <circle cx="24" cy="18" r="11" stroke="currentColor" stroke-width="2.5"/>
@@ -139,7 +142,7 @@
           <p class="stats__label">Anos de Tradição no Mercado</p>
         </div>
 
-        <div class="stats__item">
+        <div class="stats__item" data-aos="fade-up" data-aos-delay="150">
           <div class="stats__icon" aria-hidden="true">
             <svg viewBox="0 0 48 48" fill="none" xmlns="http://www.w3.org/2000/svg">
               <circle cx="19" cy="16" r="7" stroke="currentColor" stroke-width="2.5"/>
@@ -153,7 +156,7 @@
           <p class="stats__label">Clientes Atendidos</p>
         </div>
 
-        <div class="stats__item">
+        <div class="stats__item" data-aos="fade-up" data-aos-delay="300">
           <div class="stats__icon" aria-hidden="true">
             <svg viewBox="0 0 48 48" fill="none" xmlns="http://www.w3.org/2000/svg">
               <rect x="6" y="26" width="36" height="15" rx="6" stroke="currentColor" stroke-width="2.5"/>
@@ -173,7 +176,7 @@
     <!-- ===================== SOBRE A AGL ===================== -->
     <section class="section section--about" id="sobre">
       <div class="container">
-        <div class="section__text">
+        <div class="section__text" data-aos="fade-up">
           <p class="eyebrow">— Sobre a AGL</p>
           <h2 class="section__title">A arte da saboaria florentina com distribuição exclusiva nacional.</h2>
           <p class="section__paragraph">
@@ -202,7 +205,7 @@
     <!-- ===================== PRODUTOS ===================== -->
     <section class="section section--products" id="produtos">
       <div class="container">
-        <div class="section__header section__header--center">
+        <div class="section__header section__header--center" data-aos="fade-up">
           <p class="eyebrow">— Linhas de Produtos</p>
           <h2 class="section__title">Um portfólio completo para todos os perfis de negócio</h2>
           <p class="section__paragraph section__paragraph--center">
@@ -212,7 +215,7 @@
           </p>
         </div>
 
-        <div class="products-tabs" role="tablist" aria-label="Categorias de linhas de produtos">
+        <div class="products-tabs" role="tablist" aria-label="Categorias de linhas de produtos" data-aos="fade-up" data-aos-delay="100">
           <button type="button" class="products-tab is-active" role="tab" id="tab-body-care" aria-controls="panel-body-care" aria-selected="true" data-category="body-care">
             <span class="products-tab__label">Body Care</span>
           </button>
@@ -227,7 +230,7 @@
           </button>
         </div>
 
-        <div class="products-showcase">
+        <div class="products-showcase" data-aos="fade-up" data-aos-delay="200">
           <div class="products-panel is-active" id="panel-body-care" role="tabpanel" aria-labelledby="tab-body-care">
             <div class="products-panel__grid">
               <figure class="product-tile">
@@ -321,7 +324,7 @@
           </div>
         </div>
 
-        <div class="products-cta">
+        <div class="products-cta" data-aos="fade-up">
           <button type="button" class="btn btn--primary btn--lg" data-open-modal>
             RECEBA SEU CATÁLOGO EXCLUSIVO
           </button>
@@ -343,28 +346,28 @@
       </div>
 
       <div class="container">
-        <div class="section__header section__header--center">
+        <div class="section__header section__header--center" data-aos="fade-up">
           <p class="eyebrow eyebrow--light">— Por que ser parceiro AGL</p>
           <h2 class="section__title section__title--light">Vantagens de distribuir<br class="section__title-break"> Nesti Dante com a AGL</h2>
         </div>
 
         <div class="why-grid">
-          <article class="why-card">
+          <article class="why-card" data-aos="fade-up">
             <div class="why-card__orb"><span class="why-card__number">01</span></div>
             <h3 class="why-card__title">Originalidade Garantida</h3>
             <p class="why-card__text">Produtos 100% originais, importados e distribuídos oficialmente, sem intermediários.</p>
           </article>
-          <article class="why-card">
+          <article class="why-card" data-aos="fade-up" data-aos-delay="100">
             <div class="why-card__orb"><span class="why-card__number">02</span></div>
             <h3 class="why-card__title">Margem Competitiva</h3>
             <p class="why-card__text">Condições comerciais pensadas para valorizar a rentabilidade do seu ponto de venda.</p>
           </article>
-          <article class="why-card">
+          <article class="why-card" data-aos="fade-up" data-aos-delay="200">
             <div class="why-card__orb"><span class="why-card__number">03</span></div>
             <h3 class="why-card__title">Suporte Consultivo</h3>
             <p class="why-card__text">Time comercial dedicado para apoiar desde a curva de produtos até a reposição de estoque.</p>
           </article>
-          <article class="why-card">
+          <article class="why-card" data-aos="fade-up" data-aos-delay="300">
             <div class="why-card__orb"><span class="why-card__number">04</span></div>
             <h3 class="why-card__title">Marca de Prestígio</h3>
             <p class="why-card__text">Agregue valor percebido ao seu mix com uma marca italiana reconhecida internacionalmente.</p>
@@ -376,7 +379,7 @@
     <!-- ===================== CTA FINAL ===================== -->
     <section class="section section--cta" id="parceria">
       <div class="container">
-        <div class="cta-card">
+        <div class="cta-card" data-aos="fade-up">
           <h2 class="cta-card__title">Pronto para elevar o padrão do seu portfólio?</h2>
           <p class="cta-card__text">Entre em contato com a nossa equipe comercial e conheça nossas condições exclusivas de distribuição para todo o Brasil.</p>
           <button type="button" class="btn btn--primary btn--xl" data-open-modal>
@@ -397,7 +400,7 @@
           Distribuidora oficial Nesti Dante no Brasil. Levando a perfumaria italiana premium
           para o seu negócio com originalidade e excelência no atendimento.
         </p>
-        <p class="footer__legal">AGL Comércio Importação e Exportação LTDA — CNPJ: 00.861.458/0001-35</p>
+        <p class="footer__legal">AGL Comércio Importação e Exportação LTDA CNPJ: 00.861.458/0001-35</p>
       </div>
 
       <div class="footer__col">
@@ -618,8 +621,7 @@
               condições comerciais.
             </p>
             <p class="success__hint">
-              Vamos abrir o WhatsApp para que você possa adiantar sua conversa com o nosso time
-              comercial.
+              Em breve nosso time comercial entrará em contato pelo WhatsApp ou e-mail informado.
             </p>
             <button type="button" class="btn btn--primary btn--lg" data-close-modal>Fechar</button>
           </div>
@@ -632,6 +634,7 @@
   <script src="js/custom-select.js" defer></script>
   <script src="js/products-tabs.js" defer></script>
   <script src="js/form-handler.js" defer></script>
+  <script src="https://unpkg.com/aos@2.3.4/dist/aos.js" defer></script>
   <script src="js/main.js" defer></script>
 </body>
 </html>

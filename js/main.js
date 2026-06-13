@@ -7,6 +7,21 @@
   'use strict';
 
   /* ---------------------------------------------------------
+     AOS - Animate On Scroll (reveal suave dos blocos)
+     --------------------------------------------------------- */
+  if (window.AOS) {
+    window.AOS.init({
+      duration: 900,
+      easing: 'ease-out-cubic',
+      once: true,
+      offset: 80,
+      disable: function () {
+        return window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+      }
+    });
+  }
+
+  /* ---------------------------------------------------------
      Ano dinâmico no rodapé
      --------------------------------------------------------- */
   var yearEl = document.getElementById('year');

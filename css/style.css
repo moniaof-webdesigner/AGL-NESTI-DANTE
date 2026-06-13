@@ -1147,7 +1147,7 @@ textarea:focus-visible {
 .footer__legal {
   margin-top: var(--space-sm);
   font-size: 1rem;
-  color: rgba(255, 255, 255, 0.75);
+  color: rgba(255, 255, 255, 0.92);
   max-width: 360px;
 }
 

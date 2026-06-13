@@ -1,7 +1,7 @@
 /* =========================================================
    AGL BRASIL — DISTRIBUIDORA OFICIAL NESTI DANTE
-   form-handler.js — Validação, envio ao Google Sheets (Apps
-   Script) e abertura automática do WhatsApp Comercial
+   form-handler.js — Validação e envio dos dados do formulário
+   de parceria ao Google Sheets (Apps Script)
    ========================================================= */
 
 (function () {
@@ -10,16 +10,11 @@
   /* ---------------------------------------------------------
      CONFIGURAÇÃO
      ---------------------------------------------------------
-     1) GAS_WEB_APP_URL: cole aqui a URL do Web App publicado
-        a partir do Google Apps Script (veja docs/google-apps-script.md).
-
-     2) WHATSAPP_NUMBER: número do WhatsApp Comercial no
-        formato internacional, somente dígitos
-        (Ex.: 55 + DDD + número => 5511999999999).
+     GAS_WEB_APP_URL: cole aqui a URL do Web App publicado
+     a partir do Google Apps Script (veja docs/google-apps-script.md).
      --------------------------------------------------------- */
   var CONFIG = {
-    GAS_WEB_APP_URL: 'https://script.google.com/macros/s/AKfycbx2UyCQ7lOTPY_5jSECfhpEEZiTTaIBzCfgLbX40NWUngrk27YZv3Hj6AWbDFFhsdMI/exec',
-    WHATSAPP_NUMBER: '5527992750016'
+    GAS_WEB_APP_URL: 'https://script.google.com/macros/s/AKfycbx2UyCQ7lOTPY_5jSECfhpEEZiTTaIBzCfgLbX40NWUngrk27YZv3Hj6AWbDFFhsdMI/exec'
   };
 
   /* ---------------------------------------------------------
@@ -223,33 +218,6 @@
   });
 
   /* ---------------------------------------------------------
-     Monta a mensagem do WhatsApp com os dados do formulário
-     --------------------------------------------------------- */
-  function buildWhatsAppMessage(data) {
-    var lines = [
-      '🔔 NOVA SOLICITAÇÃO DE PARCERIA NESTI DANTE',
-      '',
-      'Nome: ' + data.nome,
-      'E-mail: ' + data.email,
-      'WhatsApp: ' + data.telefone,
-      'Empresa: ' + data.empresa,
-      'CNPJ: ' + data.cnpj,
-      'Segmento: ' + data.segmento,
-      'Cargo: ' + data.cargo,
-      'Produtos Premium/Importados: ' + data.premium,
-      'Origem: ' + data.origem
-    ];
-
-    return lines.join('\n');
-  }
-
-  function openWhatsApp(data) {
-    var message = buildWhatsAppMessage(data);
-    var url = 'https://wa.me/' + CONFIG.WHATSAPP_NUMBER + '?text=' + encodeURIComponent(message);
-    window.open(url, '_blank', 'noopener,noreferrer');
-  }
-
-  /* ---------------------------------------------------------
      Envia os dados para o Google Sheets via Apps Script
      ---------------------------------------------------------
      Como o Apps Script Web App não retorna cabeçalhos CORS
@@ -345,12 +313,8 @@
 
     function finishSubmission() {
       form.reset();
+      fillUTMFields(form);
       showSuccessStep();
-      // Pequeno atraso para o usuário ver a mensagem de sucesso
-      // antes de o WhatsApp abrir em nova aba.
-      window.setTimeout(function () {
-        openWhatsApp(result.data);
-      }, 600);
     }
 
     if (!gasConfigured) {

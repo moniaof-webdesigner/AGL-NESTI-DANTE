@@ -10,8 +10,7 @@ O fluxo completo é:
 2. O `js/form-handler.js` valida os dados e envia via `fetch` (POST) para a
    URL do Web App do Google Apps Script.
 3. O Apps Script grava os dados em uma nova linha da planilha Google Sheets.
-4. O site exibe a mensagem de sucesso e abre o WhatsApp Comercial com a
-   mensagem pré-formatada contendo todos os dados preenchidos.
+4. O site exibe a mensagem de sucesso dentro do próprio pop-up.
 
 ---
 
@@ -139,16 +138,11 @@ function jsonResponse(obj) {
 
 ```javascript
 var CONFIG = {
-  GAS_WEB_APP_URL: 'COLE_AQUI_A_URL_DO_GOOGLE_APPS_SCRIPT',
-  WHATSAPP_NUMBER: '5511999999999'
+  GAS_WEB_APP_URL: 'COLE_AQUI_A_URL_DO_GOOGLE_APPS_SCRIPT'
 };
 ```
 
 3. Substitua `GAS_WEB_APP_URL` pela URL copiada no passo anterior.
-4. Substitua `WHATSAPP_NUMBER` pelo número do WhatsApp Comercial da AGL,
-   no formato internacional, somente dígitos (ex.: `55` + DDD + número).
-5. No arquivo [`index.html`](../index.html), atualize também os links que
-   apontam para `https://wa.me/5511999999999` (no rodapé) com o mesmo número.
 
 ---
 
@@ -167,8 +161,8 @@ permite leitura completa da resposta por requisições cross-origin do
 navegador. Isso significa que o JavaScript não consegue ler o corpo da
 resposta (`status: 'success'`), mas a requisição **é entregue normalmente**
 ao script e a linha **é gravada na planilha**. O site trata a ausência de
-erro de rede como sucesso, exibe a mensagem de confirmação e abre o
-WhatsApp automaticamente.
+erro de rede como sucesso e exibe a mensagem de confirmação dentro do
+pop-up.
 
 Se no futuro for necessário ler a resposta (ex.: para validações no
 servidor), será preciso hospedar um pequeno proxy (ex.: Cloudflare Worker)
