@@ -14,10 +14,7 @@
       duration: 900,
       easing: 'ease-out-cubic',
       once: true,
-      offset: 80,
-      disable: function () {
-        return window.matchMedia('(prefers-reduced-motion: reduce)').matches;
-      }
+      offset: 80
     });
   }
 
@@ -154,43 +151,6 @@
     open: openModal,
     close: closeModal
   };
-
-  /* ---------------------------------------------------------
-     Animação leve de entrada (fade/slide) ao rolar
-     --------------------------------------------------------- */
-  var animatedSelectors = [
-    '.info-card',
-    '.why-card',
-    '.section__text',
-    '.section__media'
-  ];
-
-  var animatedElements = document.querySelectorAll(animatedSelectors.join(','));
-
-  if ('IntersectionObserver' in window && animatedElements.length) {
-    animatedElements.forEach(function (el) {
-      el.style.opacity = '0';
-      el.style.transform = 'translateY(16px)';
-      el.style.transition = 'opacity 0.6s ease, transform 0.6s ease';
-    });
-
-    var observer = new IntersectionObserver(
-      function (entries, obs) {
-        entries.forEach(function (entry) {
-          if (entry.isIntersecting) {
-            entry.target.style.opacity = '1';
-            entry.target.style.transform = 'translateY(0)';
-            obs.unobserve(entry.target);
-          }
-        });
-      },
-      { threshold: 0.15 }
-    );
-
-    animatedElements.forEach(function (el) {
-      observer.observe(el);
-    });
-  }
 
   /* ---------------------------------------------------------
      Faixa de Autoridade — contadores com efeito crescente
