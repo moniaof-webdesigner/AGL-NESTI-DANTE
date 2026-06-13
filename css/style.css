@@ -484,9 +484,9 @@ textarea:focus-visible {
   position: absolute;
   inset: 0;
   background: radial-gradient(
-    ellipse at 25% 60%,          /* Posição: 30% da esquerda, 55% do topo */
-    rgba(29, 27, 5, 0.8) 0%,    /* Centro bem escuro atrás do texto */
-    rgba(29, 27, 5, 0.3) 40%,    /* Vai clareando suavemente pelas bordas do texto */
+    ellipse at 30% 60%,          /* Posição: 30% da esquerda, 55% do topo */
+    rgba(29, 27, 5, 0.9) 0%,    /* Centro bem escuro atrás do texto */
+    rgba(29, 27, 5, 0.5) 30%,    /* Vai clareando suavemente pelas bordas do texto */
     rgba(29, 27, 5, 0) 95%       /* Fica 100% transparente antes de tocar nas bordas da tela */
   );
 }

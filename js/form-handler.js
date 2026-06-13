@@ -19,7 +19,7 @@
      --------------------------------------------------------- */
   var CONFIG = {
     GAS_WEB_APP_URL: 'COLE_AQUI_A_URL_DO_GOOGLE_APPS_SCRIPT',
-    WHATSAPP_NUMBER: '5527981280073'
+    WHATSAPP_NUMBER: '5527992750016'
   };
 
   var form = document.getElementById('partnershipForm');
