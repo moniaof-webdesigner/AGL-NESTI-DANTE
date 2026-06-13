@@ -1,0 +1,176 @@
+<h2>Estilo do botão liquid glass</h2>
+<p class="subtitle">Três variações usando a paleta da AGL (verde-oliva, sálvia, dourado, creme). Todas têm um brilho líquido se movendo por dentro. Veja em fundo claro e em fundo escuro (como o hero).</p>
+
+<style>
+  .lg-stage {
+    border-radius: 16px;
+    padding: 40px 24px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 18px;
+    margin-bottom: 14px;
+  }
+  .lg-stage--light {
+    background: #FFFCF4;
+    border: 1px solid #E4DFCB;
+  }
+  .lg-stage--dark {
+    background: linear-gradient(180deg, #2b2910 0%, #615D26 100%);
+  }
+  .lg-stage-label {
+    font-size: 0.75rem;
+    text-transform: uppercase;
+    letter-spacing: 0.12em;
+    opacity: 0.6;
+    margin-bottom: -6px;
+  }
+  .lg-stage--light .lg-stage-label { color: #615D26; }
+  .lg-stage--dark .lg-stage-label { color: #F4DD9B; }
+
+  .glass-btn {
+    position: relative;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    gap: 8px;
+    padding: 14px 32px;
+    border-radius: 999px;
+    font-weight: 700;
+    font-size: 1rem;
+    font-family: -apple-system, 'Segoe UI', sans-serif;
+    cursor: pointer;
+    overflow: hidden;
+    isolation: isolate;
+    backdrop-filter: blur(14px) saturate(160%);
+    -webkit-backdrop-filter: blur(14px) saturate(160%);
+    transition: transform 0.25s ease, box-shadow 0.25s ease;
+  }
+  .glass-btn:hover { transform: translateY(-2px); }
+
+  /* moving sheen shared */
+  .glass-btn::after {
+    content: '';
+    position: absolute;
+    inset: -50%;
+    background: linear-gradient(120deg, transparent 35%, rgba(255,255,255,0.55) 50%, transparent 65%);
+    transform: translateX(-60%) rotate(8deg);
+    animation: lg-sheen 4.5s ease-in-out infinite;
+    pointer-events: none;
+    z-index: 1;
+  }
+  @keyframes lg-sheen {
+    0%, 100% { transform: translateX(-60%) rotate(8deg); }
+    50% { transform: translateX(60%) rotate(8deg); }
+  }
+
+  .glass-btn span { position: relative; z-index: 2; }
+
+  /* Variant A - Olive glass (verde-oliva translúcido) */
+  .glass-btn--a {
+    background: linear-gradient(135deg, rgba(160,156,103,0.55) 0%, rgba(136,132,68,0.45) 100%);
+    border: 1px solid rgba(255,255,255,0.35);
+    color: #FFFFFF;
+    box-shadow: 0 8px 24px rgba(97,93,38,0.35), inset 0 1px 1px rgba(255,255,255,0.4);
+  }
+  .glass-btn--a:hover {
+    box-shadow: 0 12px 32px rgba(97,93,38,0.45), inset 0 1px 1px rgba(255,255,255,0.5);
+  }
+
+  /* Variant B - Cream glass (creme translúcido com brilho dourado) */
+  .glass-btn--b {
+    background: linear-gradient(135deg, rgba(255,255,255,0.55) 0%, rgba(246,242,228,0.35) 100%);
+    border: 1px solid rgba(255,255,255,0.6);
+    color: #615D26;
+    box-shadow: 0 8px 24px rgba(29,27,5,0.18), inset 0 1px 1px rgba(255,255,255,0.7);
+  }
+  .glass-btn--b::after {
+    background: linear-gradient(120deg, transparent 35%, rgba(244,221,155,0.7) 50%, transparent 65%);
+  }
+  .glass-btn--b:hover {
+    box-shadow: 0 12px 32px rgba(29,27,5,0.24), inset 0 1px 1px rgba(255,255,255,0.8);
+  }
+
+  /* Variant C - Liquid blob (gota de cor se movendo dentro do vidro) */
+  .glass-btn--c {
+    background: rgba(255,255,255,0.12);
+    border: 1px solid rgba(255,255,255,0.35);
+    color: #FFFFFF;
+    box-shadow: 0 8px 24px rgba(29,27,5,0.3), inset 0 1px 1px rgba(255,255,255,0.4);
+  }
+  .glass-btn--c::before {
+    content: '';
+    position: absolute;
+    width: 140%;
+    height: 220%;
+    top: -60%;
+    left: -40%;
+    background: radial-gradient(circle at 30% 30%, rgba(244,221,155,0.9) 0%, rgba(136,132,68,0.6) 35%, transparent 70%);
+    animation: lg-blob 6s ease-in-out infinite;
+    z-index: 0;
+    filter: blur(2px);
+  }
+  .glass-btn--c::after {
+    background: linear-gradient(120deg, transparent 40%, rgba(255,255,255,0.35) 50%, transparent 60%);
+  }
+  @keyframes lg-blob {
+    0%, 100% { transform: translate(0, 0) scale(1); }
+    50% { transform: translate(30%, 15%) scale(1.2); }
+  }
+  .lg-stage--light .glass-btn--c { color: #3a3812; text-shadow: 0 1px 2px rgba(255,255,255,0.4); }
+</style>
+
+<div class="cards">
+  <div class="card" data-choice="a" onclick="toggleSelect(this)">
+    <div class="card-image" style="padding:0;">
+      <div class="lg-stage lg-stage--light">
+        <span class="lg-stage-label">Fundo claro</span>
+        <button class="glass-btn glass-btn--a"><span>Solicitar Catálogo</span></button>
+      </div>
+      <div class="lg-stage lg-stage--dark">
+        <span class="lg-stage-label">Fundo escuro (hero)</span>
+        <button class="glass-btn glass-btn--a"><span>Seja Parceiro</span></button>
+      </div>
+    </div>
+    <div class="card-body">
+      <h3>A — Vidro Verde-Oliva</h3>
+      <p>Vidro translúcido nos tons da paleta, com brilho deslizando. Discreto e elegante.</p>
+    </div>
+  </div>
+
+  <div class="card" data-choice="b" onclick="toggleSelect(this)">
+    <div class="card-image" style="padding:0;">
+      <div class="lg-stage lg-stage--light">
+        <span class="lg-stage-label">Fundo claro</span>
+        <button class="glass-btn glass-btn--b"><span>Solicitar Catálogo</span></button>
+      </div>
+      <div class="lg-stage lg-stage--dark">
+        <span class="lg-stage-label">Fundo escuro (hero)</span>
+        <button class="glass-btn glass-btn--b"><span>Seja Parceiro</span></button>
+      </div>
+    </div>
+    <div class="card-body">
+      <h3>B — Vidro Creme/Dourado</h3>
+      <p>Vidro claro com brilho dourado quente. Alto contraste, sofisticado, lembra a referência.</p>
+    </div>
+  </div>
+
+  <div class="card" data-choice="c" onclick="toggleSelect(this)">
+    <div class="card-image" style="padding:0;">
+      <div class="lg-stage lg-stage--light">
+        <span class="lg-stage-label">Fundo claro</span>
+        <button class="glass-btn glass-btn--c"><span>Solicitar Catálogo</span></button>
+      </div>
+      <div class="lg-stage lg-stage--dark">
+        <span class="lg-stage-label">Fundo escuro (hero)</span>
+        <button class="glass-btn glass-btn--c"><span>Seja Parceiro</span></button>
+      </div>
+    </div>
+    <div class="card-body">
+      <h3>C — Gota Líquida Colorida</h3>
+      <p>Vidro escuro com uma "gota" dourada/oliva se movendo dentro, como na imagem de referência.</p>
+    </div>
+  </div>
+</div>
+
+<p class="subtitle">Clique no card que mais gostou. Os botões já estão animados — observe o brilho/gota se movendo por alguns segundos.</p>

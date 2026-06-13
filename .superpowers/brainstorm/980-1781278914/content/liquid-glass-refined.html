@@ -1,0 +1,91 @@
+<h2>Refinando a opção C para todos os contextos</h2>
+<p class="subtitle">A opção C ficou ótima no hero (fundo escuro), mas o vidro quase transparente pode "desaparecer" em seções claras (formulário, modal, CTA de produtos). Combinei a base de vidro verde-oliva (mais visível) com a gota dourada se movendo da opção C. Compare:</p>
+
+<style>
+  .lg-stage { border-radius: 16px; padding: 36px 24px; display: flex; flex-direction: column; align-items: center; gap: 16px; margin-bottom: 14px; }
+  .lg-stage--light { background: #FFFCF4; border: 1px solid #E4DFCB; }
+  .lg-stage--dark { background: linear-gradient(180deg, #2b2910 0%, #615D26 100%); }
+  .lg-stage-label { font-size: 0.75rem; text-transform: uppercase; letter-spacing: 0.12em; opacity: 0.6; margin-bottom: -4px; }
+  .lg-stage--light .lg-stage-label { color: #615D26; }
+  .lg-stage--dark .lg-stage-label { color: #F4DD9B; }
+
+  .glass-btn {
+    position: relative; display: inline-flex; align-items: center; justify-content: center; gap: 8px;
+    padding: 14px 32px; border-radius: 999px; font-weight: 700; font-size: 1rem;
+    font-family: -apple-system, 'Segoe UI', sans-serif; cursor: pointer; overflow: hidden; isolation: isolate;
+    backdrop-filter: blur(14px) saturate(160%); -webkit-backdrop-filter: blur(14px) saturate(160%);
+    transition: transform 0.25s ease, box-shadow 0.25s ease;
+  }
+  .glass-btn:hover { transform: translateY(-2px); }
+  .glass-btn span { position: relative; z-index: 2; }
+
+  /* sheen */
+  .glass-btn::after {
+    content: ''; position: absolute; inset: -50%;
+    background: linear-gradient(120deg, transparent 40%, rgba(255,255,255,0.4) 50%, transparent 60%);
+    transform: translateX(-60%) rotate(8deg);
+    animation: lg-sheen 4.5s ease-in-out infinite; pointer-events: none; z-index: 1;
+  }
+  @keyframes lg-sheen { 0%,100% { transform: translateX(-60%) rotate(8deg); } 50% { transform: translateX(60%) rotate(8deg); } }
+
+  /* Refined C: olive glass body + moving gold blob */
+  .glass-btn--c2 {
+    background: linear-gradient(135deg, rgba(136,132,68,0.55) 0%, rgba(97,93,38,0.55) 100%);
+    border: 1px solid rgba(255,255,255,0.35);
+    color: #FFFFFF;
+    box-shadow: 0 8px 24px rgba(29,27,5,0.25), inset 0 1px 1px rgba(255,255,255,0.45);
+  }
+  .glass-btn--c2::before {
+    content: ''; position: absolute; width: 140%; height: 220%; top: -60%; left: -40%;
+    background: radial-gradient(circle at 30% 30%, rgba(244,221,155,0.85) 0%, rgba(160,156,103,0.5) 35%, transparent 70%);
+    animation: lg-blob 6s ease-in-out infinite; z-index: 0; filter: blur(3px);
+  }
+  @keyframes lg-blob { 0%,100% { transform: translate(0,0) scale(1); } 50% { transform: translate(30%, 15%) scale(1.2); } }
+  .glass-btn--c2:hover { box-shadow: 0 12px 32px rgba(29,27,5,0.35), inset 0 1px 1px rgba(255,255,255,0.55); }
+
+  /* size variant for the smaller header button */
+  .glass-btn--sm { padding: 10px 22px; font-size: 0.9rem; }
+  .glass-btn--block { width: 100%; }
+</style>
+
+<div class="split">
+  <div class="mockup">
+    <div class="mockup-header">Hero (fundo escuro)</div>
+    <div class="mockup-body">
+      <div class="lg-stage lg-stage--dark">
+        <span class="lg-stage-label">Botão grande</span>
+        <button class="glass-btn glass-btn--c2"><span>Seja Parceiro</span></button>
+        <span class="lg-stage-label">Header (pequeno)</span>
+        <button class="glass-btn glass-btn--c2 glass-btn--sm"><span>Quero ser Distribuidor</span></button>
+      </div>
+    </div>
+  </div>
+  <div class="mockup">
+    <div class="mockup-header">Seção / Formulário (fundo claro)</div>
+    <div class="mockup-body">
+      <div class="lg-stage lg-stage--light">
+        <span class="lg-stage-label">CTA de produtos</span>
+        <button class="glass-btn glass-btn--c2"><span>Solicitar Catálogo</span></button>
+        <span class="lg-stage-label">Botão de formulário (largura total)</span>
+        <button class="glass-btn glass-btn--c2 glass-btn--block"><span>Enviar Solicitação</span></button>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div class="options" style="margin-top:20px;">
+  <div class="option" data-choice="approve" onclick="toggleSelect(this)">
+    <div class="letter">✓</div>
+    <div class="content">
+      <h3>Aprovar este estilo</h3>
+      <p>Aplicar este vidro verde-oliva com gota dourada animada em todos os botões do site (.btn)</p>
+    </div>
+  </div>
+  <div class="option" data-choice="adjust" onclick="toggleSelect(this)">
+    <div class="letter">✎</div>
+    <div class="content">
+      <h3>Quero ajustar</h3>
+      <p>Me diga em palavras o que mudar (cor, intensidade do brilho, velocidade da animação, etc.)</p>
+    </div>
+  </div>
+</div>

@@ -1,0 +1,241 @@
+/* =========================================================
+   AGL BRASIL — DISTRIBUIDORA OFICIAL NESTI DANTE
+   responsive.css — Media queries (mobile-first overrides)
+   ========================================================= */
+
+/* ---------------------------------------------------------
+   Telas grandes (>= 1280px): mais respiro
+   --------------------------------------------------------- */
+@media (min-width: 1280px) {
+  :root {
+    --container-width: 1280px;
+  }
+}
+
+/* ---------------------------------------------------------
+   Tablets (<= 1024px)
+   --------------------------------------------------------- */
+@media (max-width: 1024px) {
+  .products-panel__grid,
+  .why-grid {
+    grid-template-columns: repeat(2, 1fr);
+  }
+
+  .section__title-break {
+    display: none;
+  }
+
+  .footer__container {
+    grid-template-columns: 1fr 1fr;
+  }
+
+  .footer__brand {
+    grid-column: span 2;
+  }
+}
+
+/* ---------------------------------------------------------
+   Navegação mobile (<= 900px)
+   --------------------------------------------------------- */
+@media (max-width: 900px) {
+  .nav-toggle {
+    display: flex;
+  }
+
+  .nav {
+    position: fixed;
+    top: var(--header-height);
+    left: 0;
+    right: 0;
+    background-color: var(--color-bg);
+    border-bottom: 1px solid var(--color-border);
+    box-shadow: var(--shadow-md);
+    transform: translateY(-12px);
+    opacity: 0;
+    visibility: hidden;
+    transition: opacity var(--transition-base), transform var(--transition-base), visibility var(--transition-base);
+    max-height: calc(100vh - var(--header-height));
+    overflow-y: auto;
+  }
+
+  .nav.is-open {
+    transform: translateY(0);
+    opacity: 1;
+    visibility: visible;
+  }
+
+  .nav__list {
+    flex-direction: column;
+    gap: 0;
+    padding: var(--space-sm) var(--space-md);
+  }
+
+  .nav__list li {
+    border-bottom: 1px solid var(--color-border);
+  }
+
+  .nav__list li:last-child {
+    border-bottom: none;
+  }
+
+  .nav__link {
+    display: block;
+    padding: var(--space-sm) 0;
+    color: var(--color-text);
+  }
+
+  .nav__link:hover,
+  .nav__link:focus-visible {
+    color: var(--color-primary-dark);
+  }
+
+  .nav__link::after {
+    display: none;
+  }
+
+  .header__actions .btn--sm {
+    padding: 0.55rem 1rem;
+    font-size: 0.85rem;
+  }
+}
+
+/* Abre/fecha o menu mobile via classe controlada por JS */
+.nav-toggle.is-active .nav-toggle__bar:nth-child(1) {
+  transform: translateY(7px) rotate(45deg);
+}
+
+.nav-toggle.is-active .nav-toggle__bar:nth-child(2) {
+  opacity: 0;
+}
+
+.nav-toggle.is-active .nav-toggle__bar:nth-child(3) {
+  transform: translateY(-7px) rotate(-45deg);
+}
+
+/* ---------------------------------------------------------
+   Tablet pequeno / mobile grande (<= 768px)
+   --------------------------------------------------------- */
+@media (max-width: 768px) {
+  :root {
+    --space-2xl: 3.5rem;
+    --space-xl: 2.5rem;
+  }
+
+  .section--about {
+    min-height: auto;
+  }
+
+  .section--about .section__text {
+    max-width: none;
+  }
+
+  .products-panel__grid,
+  .why-grid {
+    grid-template-columns: 1fr;
+  }
+
+  .products-tabs {
+    gap: var(--space-md);
+  }
+
+  .hero {
+    min-height: 100vh;
+  }
+
+  .hero__actions {
+    flex-direction: column;
+    align-items: stretch;
+  }
+
+  .hero__actions .btn {
+    width: 100%;
+  }
+
+  .stats__grid {
+    grid-template-columns: 1fr;
+    gap: var(--space-lg);
+  }
+
+  .stats__item:not(:last-child)::after {
+    top: auto;
+    bottom: calc(var(--space-lg) / -2 - 0.5px);
+    left: 20%;
+    right: 20%;
+    width: auto;
+    height: 1px;
+  }
+
+  .footer__container {
+    grid-template-columns: 1fr;
+  }
+
+  .footer__brand {
+    grid-column: auto;
+  }
+
+  .footer__bottom-inner {
+    flex-direction: column;
+    text-align: center;
+    padding: 2.5rem var(--space-md) 3rem;
+    padding-top: 2.5rem;
+    gap: 0.1rem;
+  }
+
+  .modal__dialog {
+    max-height: 95vh;
+  }
+
+  .modal__content {
+    padding: var(--space-lg) var(--space-md);
+  }
+}
+
+/* ---------------------------------------------------------
+   Mobile pequeno (<= 480px)
+   --------------------------------------------------------- */
+@media (max-width: 480px) {
+  .container {
+    padding: 0 var(--space-sm);
+  }
+
+  .header__actions .btn--sm {
+    display: none;
+  }
+
+  .hero__title {
+    font-size: 2rem;
+  }
+
+  .hero__subtitle {
+    font-size: 1.25rem;
+  }
+
+  .btn--lg {
+    padding: 0.9rem 1.5rem;
+    font-size: 1rem;
+  }
+
+  .btn--xl {
+    padding: 1.1rem 2rem;
+    font-size: 1.1rem;
+  }
+
+  .modal__close {
+    top: 0.6rem;
+    right: 0.6rem;
+    width: 36px;
+    height: 36px;
+  }
+
+  .section--about {
+    background-image: url('../assets/images/bg-sobre-mobile.avif');
+  }
+
+  .section--about .btn {
+    width: 100%;
+  }
+
+  .section--cta {
+    background-image: url('../assets/images/bg-cta-mobile.avif');
+  }
+}
