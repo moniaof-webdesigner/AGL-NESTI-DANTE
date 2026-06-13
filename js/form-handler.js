@@ -18,7 +18,7 @@
         (Ex.: 55 + DDD + número => 5511999999999).
      --------------------------------------------------------- */
   var CONFIG = {
-    GAS_WEB_APP_URL: 'COLE_AQUI_A_URL_DO_GOOGLE_APPS_SCRIPT',
+    GAS_WEB_APP_URL: 'https://script.google.com/macros/s/AKfycbx2UyCQ7lOTPY_5jSECfhpEEZiTTaIBzCfgLbX40NWUngrk27YZv3Hj6AWbDFFhsdMI/exec',
     WHATSAPP_NUMBER: '5527992750016'
   };
 
