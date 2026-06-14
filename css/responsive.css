@@ -161,6 +161,12 @@
     min-height: 100vh;
   }
 
+  /* Leve blur na imagem de fundo do hero para melhorar a leitura do texto */
+  .hero__bg-img {
+    filter: blur(3px);
+    transform: scale(1.05);
+  }
+
   /* Overlay do hero ajustado para mobile: texto ocupa a largura toda,
      então a elipse de contraste fica centralizada, mais ampla e difusa */
   .hero__overlay {
