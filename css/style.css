@@ -510,6 +510,10 @@ textarea:focus-visible {
   margin-bottom: var(--space-sm);
 }
 
+.hero__eyebrow-break {
+  display: none;
+}
+
 .hero__title {
   font-size: clamp(2rem, 1.5rem + 2.4vw, 3.1rem);
   line-height: 1.1;

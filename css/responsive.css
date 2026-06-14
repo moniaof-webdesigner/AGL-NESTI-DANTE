@@ -161,6 +161,17 @@
     min-height: 100vh;
   }
 
+  /* Overlay do hero ajustado para mobile: texto ocupa a largura toda,
+     então a elipse de contraste fica centralizada e mais ampla */
+  .hero__overlay {
+    background: radial-gradient(
+      ellipse at 30% 45%,
+      rgba(29, 27, 5, 0.7) 0%,
+      rgba(29, 27, 5, 0.45) 55%,
+      rgba(29, 27, 5, 0) 95%
+    );
+  }
+
   .hero__actions {
     flex-direction: column;
     align-items: stretch;
@@ -219,6 +230,10 @@
 
   .header__actions .btn--sm {
     display: none;
+  }
+
+  .hero__eyebrow-break {
+    display: block;
   }
 
   .hero__title {
