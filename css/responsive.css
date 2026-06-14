@@ -240,11 +240,17 @@
   }
 
   /* Iguala a altura dos botões "Quero ser parceiro" e "Quero estes
-     produtos na minha loja" à do botão "Falar com o comercial" do CTA */
+     produtos na minha loja" à do botão "Falar com o comercial" do CTA,
+     sem aumentar a largura (texto menor + padding lateral reduzido) */
   .section--about .btn,
   .section--products .btn {
-    padding: 1.1rem 2rem;
-    font-size: 1.1rem;
+    padding: 1.1rem 1.25rem;
+    font-size: 0.95rem;
+  }
+
+  .section--products .btn {
+    width: 100%;
+    white-space: normal;
   }
 
   .modal__close {
