@@ -810,7 +810,7 @@ textarea:focus-visible {
   background-color: transparent;
   border: 1.5px solid transparent;
   border-radius: var(--radius-md);
-  padding: 0.6rem 1.4rem;
+  padding: 0.85rem 1.75rem;
   font-family: var(--font-heading);
   font-size: 1.05rem;
   letter-spacing: 0.06em;
