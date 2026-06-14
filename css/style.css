@@ -25,6 +25,8 @@
   --color-secondary-rgb: 160, 156, 103;
   --color-gold-rgb: 244, 221, 155;
   --color-gold: #F4DD9B;
+  --color-gold-deep-rgb: 201, 162, 77;
+  --color-gold-deep: #C9A24D;
 
   /* Tons derivados */
   --color-bg-alt: #F6F2E4;
@@ -703,6 +705,14 @@ textarea:focus-visible {
   color: var(--color-text);
 }
 
+.section__subtitle {
+  font-family: var(--font-heading);
+  font-size: 1.25rem;
+  color: var(--color-primary-dark);
+  margin-top: var(--space-md);
+  margin-bottom: var(--space-xs);
+}
+
 .section--about .check-list li {
   font-size: 1rem;
   margin-bottom: 0.3rem;
@@ -721,17 +731,23 @@ textarea:focus-visible {
   margin-top: var(--space-lg);
 }
 
-/* Botão sobre fundo claro: borda mais escura para destacar contra a imagem/bg claros */
+/* Botão sobre fundo claro: dourado mais escuro e sólido, com borda em degradê suave */
 .section--about .btn,
 .section--products .btn {
-  border-color: rgba(29, 27, 5, 0.25);
+  background:
+    linear-gradient(135deg, var(--color-gold-deep) 0%, var(--color-primary-dark) 100%) padding-box,
+    linear-gradient(135deg, rgba(255, 255, 255, 0.55) 0%, rgba(var(--color-gold-rgb), 0.6) 100%) border-box;
+  border: 1.5px solid transparent;
+  color: var(--color-white);
 }
 
 .section--about .btn:hover,
 .section--about .btn:focus-visible,
 .section--products .btn:hover,
 .section--products .btn:focus-visible {
-  border-color: rgba(29, 27, 5, 0.4);
+  background:
+    linear-gradient(135deg, var(--color-gold-deep) 0%, var(--color-primary-dark) 100%) padding-box,
+    linear-gradient(135deg, rgba(255, 255, 255, 0.85) 0%, rgba(var(--color-gold-rgb), 0.9) 100%) border-box;
 }
 
 .check-list li {
@@ -1101,17 +1117,30 @@ textarea:focus-visible {
 
 /* Botão sobre fundo escuro: troca o gradiente translúcido por tons
    claros/dourados para manter contraste contra o bg escuro */
-.section--why .btn,
-.section--cta .btn {
+.section--why .btn {
   background: linear-gradient(135deg, rgba(var(--color-gold-rgb), 0.9) 0%, rgba(var(--color-secondary-rgb), 0.9) 100%);
   border-color: rgba(29, 27, 5, 0.15);
   color: var(--color-primary-dark);
 }
 
-.section--why .btn:hover,
-.section--why .btn:focus-visible,
+/* Botão do CTA final: dourado mais escuro e sólido, com borda em degradê suave */
+.section--cta .btn {
+  background:
+    linear-gradient(135deg, var(--color-gold-deep) 0%, var(--color-primary-dark) 100%) padding-box,
+    linear-gradient(135deg, rgba(255, 255, 255, 0.55) 0%, rgba(var(--color-gold-rgb), 0.6) 100%) border-box;
+  border: 1.5px solid transparent;
+  color: var(--color-white);
+}
+
 .section--cta .btn:hover,
 .section--cta .btn:focus-visible {
+  background:
+    linear-gradient(135deg, var(--color-gold-deep) 0%, var(--color-primary-dark) 100%) padding-box,
+    linear-gradient(135deg, rgba(255, 255, 255, 0.85) 0%, rgba(var(--color-gold-rgb), 0.9) 100%) border-box;
+}
+
+.section--why .btn:hover,
+.section--why .btn:focus-visible {
   border-color: rgba(29, 27, 5, 0.3);
 }
 
@@ -1125,7 +1154,7 @@ textarea:focus-visible {
 
 .footer__container {
   display: grid;
-  grid-template-columns: 2fr 1fr 1fr;
+  grid-template-columns: 2fr 1fr 1fr 1fr;
   gap: var(--space-xl);
   padding-top: var(--space-2xl);
   padding-bottom: var(--space-xl);
@@ -1351,6 +1380,12 @@ textarea:focus-visible {
 
 .form__label span[aria-hidden="true"] {
   color: var(--color-primary);
+}
+
+.form__optional {
+  font-weight: 400;
+  font-size: 0.85rem;
+  color: #8a8569;
 }
 
 .form__input {

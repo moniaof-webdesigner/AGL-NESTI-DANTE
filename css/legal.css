@@ -1,0 +1,111 @@
+/* =========================================================
+   AGL BRASIL — DISTRIBUIDORA OFICIAL NESTI DANTE
+   legal.css — Estilos das páginas institucionais
+   (Política de Privacidade e Termos de Uso)
+   ========================================================= */
+
+/* Header sólido (sem hero de fundo nestas páginas) */
+.legal-page .header {
+  background-color: var(--color-secondary);
+  border-bottom-color: rgba(255, 255, 255, 0.1);
+  box-shadow: 0 4px 20px rgba(29, 27, 5, 0.12);
+}
+
+/* ---------------------------------------------------------
+   Cabeçalho da página
+   --------------------------------------------------------- */
+.legal-hero {
+  padding-top: calc(var(--header-height) + var(--space-xl));
+  padding-bottom: var(--space-lg);
+  background-color: var(--color-bg-alt);
+  border-bottom: 1px solid var(--color-border);
+  text-align: center;
+}
+
+.legal-hero__title {
+  font-family: var(--font-heading);
+  color: var(--color-primary-dark);
+  font-size: clamp(2rem, 4vw, 3rem);
+  margin-top: var(--space-sm);
+}
+
+.legal-hero__updated {
+  margin-top: var(--space-sm);
+  font-size: 0.95rem;
+  color: var(--color-text);
+  opacity: 0.7;
+}
+
+/* ---------------------------------------------------------
+   Conteúdo
+   --------------------------------------------------------- */
+.legal-content {
+  padding: var(--space-2xl) 0;
+}
+
+.legal-article {
+  max-width: 800px;
+  margin: 0 auto;
+  background-color: var(--color-white);
+  border: 1px solid var(--color-border);
+  border-radius: var(--radius-lg);
+  box-shadow: var(--shadow-sm);
+  padding: var(--space-xl);
+}
+
+.legal-article h2 {
+  font-family: var(--font-heading);
+  color: var(--color-primary-dark);
+  font-size: 1.4rem;
+  margin-top: var(--space-lg);
+}
+
+.legal-article h2:first-child {
+  margin-top: 0;
+}
+
+.legal-article p,
+.legal-article li {
+  font-size: 1rem;
+  line-height: 1.7;
+  color: var(--color-text);
+}
+
+.legal-article p {
+  margin-top: var(--space-sm);
+}
+
+.legal-article ul {
+  margin-top: var(--space-sm);
+  padding-left: 1.4rem;
+}
+
+.legal-article li {
+  margin-bottom: 0.5rem;
+}
+
+.legal-article li::marker {
+  color: var(--color-primary);
+}
+
+.legal-article a {
+  color: var(--color-primary-dark);
+  text-decoration: underline;
+  text-decoration-color: var(--color-gold);
+  text-underline-offset: 3px;
+}
+
+.legal-article a:hover,
+.legal-article a:focus-visible {
+  color: var(--color-primary);
+}
+
+.legal-article strong {
+  color: var(--color-primary-dark);
+}
+
+@media (max-width: 600px) {
+  .legal-article {
+    padding: var(--space-lg) var(--space-md);
+  }
+}

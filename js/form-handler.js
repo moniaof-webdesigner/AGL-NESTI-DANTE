@@ -93,20 +93,21 @@
       return value.trim().length >= 2 ? '' : 'Informe o nome da empresa.';
     },
     cnpj: function (value) {
+      if (!value.trim()) return '';
       var digits = value.replace(/\D/g, '');
-      return digits.length === 14 ? '' : 'Informe um CNPJ válido (14 dígitos).';
+      return digits.length === 14 ? '' : 'Informe um CNPJ válido (14 dígitos) ou deixe em branco.';
     },
     segmento: function (value) {
       return value ? '' : 'Selecione o segmento da sua empresa.';
     },
-    cargo: function (value) {
-      return value ? '' : 'Selecione o seu cargo na empresa.';
+    cargo: function () {
+      return '';
     },
-    premium: function (value) {
-      return value ? '' : 'Selecione uma opção.';
+    premium: function () {
+      return '';
     },
-    origem: function (value) {
-      return value ? '' : 'Selecione como conheceu a Nesti Dante.';
+    origem: function () {
+      return '';
     }
   };
 
