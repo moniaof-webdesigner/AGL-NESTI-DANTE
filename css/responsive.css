@@ -143,6 +143,16 @@
     grid-template-columns: 1fr;
   }
 
+  /* Espaço extra entre os cards para o orb numerado não encostar no card anterior */
+  .why-grid {
+    gap: 3.5rem;
+  }
+
+  /* Eyebrow mais escuro: o orb dourado por trás deixa o tom claro apagado */
+  .section--why .eyebrow--light {
+    color: var(--color-primary-dark);
+  }
+
   .products-tabs {
     gap: var(--space-md);
   }
@@ -225,6 +235,14 @@
   }
 
   .btn--xl {
+    padding: 1.1rem 2rem;
+    font-size: 1.1rem;
+  }
+
+  /* Iguala a altura dos botões "Quero ser parceiro" e "Quero estes
+     produtos na minha loja" à do botão "Falar com o comercial" do CTA */
+  .section--about .btn,
+  .section--products .btn {
     padding: 1.1rem 2rem;
     font-size: 1.1rem;
   }
