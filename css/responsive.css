@@ -25,6 +25,10 @@
    Tablets (<= 1024px)
    --------------------------------------------------------- */
 @media (max-width: 1024px) {
+  .section--about {
+    background-image: url('../assets/images/bg-sobre-mobile.avif');
+  }
+
   .products-panel__grid,
   .why-grid {
     grid-template-columns: repeat(2, 1fr);
