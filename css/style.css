@@ -548,7 +548,7 @@ textarea:focus-visible {
 
 .stats__grid {
   display: grid;
-  grid-template-columns: repeat(3, 1fr);
+  grid-template-columns: repeat(3, minmax(200px, 1fr));
   gap: var(--space-lg);
   text-align: center;
 }
@@ -632,7 +632,7 @@ textarea:focus-visible {
   font-size: 1rem;
   font-weight: 600;
   color: var(--color-text);
-  max-width: 220px;
+  max-width: 280px;
 }
 
 /* ---------------------------------------------------------
