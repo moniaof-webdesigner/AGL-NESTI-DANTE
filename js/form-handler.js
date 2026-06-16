@@ -14,7 +14,7 @@
      a partir do Google Apps Script (veja docs/google-apps-script.md).
      --------------------------------------------------------- */
   var CONFIG = {
-    GAS_WEB_APP_URL: 'https://script.google.com/macros/s/AKfycbx2UyCQ7lOTPY_5jSECfhpEEZiTTaIBzCfgLbX40NWUngrk27YZv3Hj6AWbDFFhsdMI/exec'
+    GAS_WEB_APP_URL: 'https://script.google.com/macros/s/AKfycbwfdkSUri4EzS1CXtv3cR00oLzcoMHTZQajauN7Rq6S7qf3SnKpBZSYQbgCWATtPcO3/exec'
   };
 
   /* ---------------------------------------------------------
