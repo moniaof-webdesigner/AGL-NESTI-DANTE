@@ -223,7 +223,7 @@
   }
 
   .modal__dialog {
-    max-height: 95vh;
+    max-height: min(95vh, 95dvh);
   }
 
   .modal__content {

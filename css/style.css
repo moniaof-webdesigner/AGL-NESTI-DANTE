@@ -1249,7 +1249,7 @@ textarea:focus-visible {
   display: flex;
   align-items: center;
   justify-content: center;
-  padding: var(--space-md);
+  padding: max(var(--space-md), env(safe-area-inset-top)) var(--space-md) max(var(--space-md), env(safe-area-inset-bottom));
   visibility: hidden;
   opacity: 0;
   transition: opacity var(--transition-base), visibility var(--transition-base);
@@ -1273,7 +1273,7 @@ textarea:focus-visible {
   border-radius: var(--radius-lg);
   width: 100%;
   max-width: 640px;
-  max-height: 90vh;
+  max-height: min(90vh, 90dvh);
   overflow: hidden;
   display: flex;
   flex-direction: column;
