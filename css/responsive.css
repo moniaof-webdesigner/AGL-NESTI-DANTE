@@ -116,8 +116,8 @@
     gap: var(--space-lg) var(--space-md);
   }
 
-  .stats__item::after {
-    display: none;
+  .stats__item:not(:last-child) {
+    border-right: none;
   }
 }
 
@@ -206,14 +206,10 @@
     gap: var(--space-lg);
   }
 
-  .stats__item:not(:last-child)::after {
-    display: block;
-    top: auto;
-    bottom: calc(var(--space-lg) / -2 - 0.5px);
-    left: 20%;
-    right: 20%;
-    width: auto;
-    height: 1px;
+  .stats__item:not(:last-child) {
+    border-right: none;
+    border-bottom: 1px solid var(--color-border);
+    padding-bottom: var(--space-lg);
   }
 
   .footer__container {
