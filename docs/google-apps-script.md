@@ -29,16 +29,17 @@ exatamente nesta ordem:
 | E      | Empresa             | Nome da empresa                                          |
 | F      | CNPJ                | CNPJ informado                                           |
 | G      | Segmento            | Segmento da empresa                                      |
-| H      | Cargo               | Cargo do solicitante                                     |
-| I      | Premium/Importados  | Se já trabalha com produtos premium/importados           |
-| J      | Origem              | Como conheceu a Nesti Dante                              |
-| K      | Origem do Site      | Domínio de onde o formulário foi enviado                 |
-| L      | Data Envio (ISO)    | Data/hora enviada pelo navegador (ISO 8601)              |
-| M      | UTM Source          | `utm_source` capturado da URL (ex.: `google`, `facebook`) |
-| N      | UTM Medium          | `utm_medium` capturado da URL (ex.: `cpc`, `paid-social`) |
-| O      | UTM Campaign        | `utm_campaign` capturado da URL                          |
-| P      | UTM Content         | `utm_content` capturado da URL                           |
-| Q      | UTM Term            | `utm_term` capturado da URL                              |
+| H      | Segmento (Outro)    | Texto digitado quando o segmento selecionado é "Outro"   |
+| I      | Cargo               | Cargo do solicitante                                     |
+| J      | Premium/Importados  | Se já trabalha com produtos premium/importados           |
+| K      | Origem              | Como conheceu a Nesti Dante                              |
+| L      | Origem do Site      | Domínio de onde o formulário foi enviado                 |
+| M      | Data Envio (ISO)    | Data/hora enviada pelo navegador (ISO 8601)              |
+| N      | UTM Source          | `utm_source` capturado da URL (ex.: `google`, `facebook`) |
+| O      | UTM Medium          | `utm_medium` capturado da URL (ex.: `cpc`, `paid-social`) |
+| P      | UTM Campaign        | `utm_campaign` capturado da URL                          |
+| Q      | UTM Content         | `utm_content` capturado da URL                           |
+| R      | UTM Term            | `utm_term` capturado da URL                              |
 
 > Dica: deixe a primeira linha em negrito e congele-a (Exibir → Congelar →
 > 1 linha) para facilitar a leitura.
@@ -82,16 +83,17 @@ function doPost(e) {
       params.empresa || '',             // E - Empresa
       params.cnpj || '',                // F - CNPJ
       params.segmento || '',            // G - Segmento
-      params.cargo || '',               // H - Cargo
-      params.premium || '',             // I - Premium/Importados
-      params.origem || '',              // J - Origem
-      params.origemSite || '',          // K - Origem do Site
-      params.dataEnvio || '',           // L - Data Envio (ISO, do navegador)
-      params.utm_source || '',          // M - UTM Source
-      params.utm_medium || '',          // N - UTM Medium
-      params.utm_campaign || '',        // O - UTM Campaign
-      params.utm_content || '',         // P - UTM Content
-      params.utm_term || ''             // Q - UTM Term
+      params.segmento_outro || '',      // H - Segmento (Outro)
+      params.cargo || '',               // I - Cargo
+      params.premium || '',             // J - Premium/Importados
+      params.origem || '',              // K - Origem
+      params.origemSite || '',          // L - Origem do Site
+      params.dataEnvio || '',           // M - Data Envio (ISO, do navegador)
+      params.utm_source || '',          // N - UTM Source
+      params.utm_medium || '',          // O - UTM Medium
+      params.utm_campaign || '',        // P - UTM Campaign
+      params.utm_content || '',         // Q - UTM Content
+      params.utm_term || ''             // R - UTM Term
     ];
 
     sheet.appendRow(row);

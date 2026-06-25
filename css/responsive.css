@@ -110,6 +110,15 @@
     padding: 0.55rem 1rem;
     font-size: 0.85rem;
   }
+
+  .stats__grid {
+    grid-template-columns: repeat(2, 1fr);
+    gap: var(--space-lg) var(--space-md);
+  }
+
+  .stats__item::after {
+    display: none;
+  }
 }
 
 /* Abre/fecha o menu mobile via classe controlada por JS */
@@ -198,6 +207,7 @@
   }
 
   .stats__item:not(:last-child)::after {
+    display: block;
     top: auto;
     bottom: calc(var(--space-lg) / -2 - 0.5px);
     left: 20%;

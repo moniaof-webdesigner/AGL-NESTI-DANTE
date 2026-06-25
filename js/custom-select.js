@@ -9,6 +9,22 @@
   var selects = document.querySelectorAll('.custom-select');
   if (!selects.length) return;
 
+  var segmentoOutroGroup = document.getElementById('segmento-outro-group');
+  var segmentoOutroInput = document.getElementById('segmento_outro');
+
+  function toggleSegmentoOutro(show) {
+    if (!segmentoOutroGroup) return;
+    segmentoOutroGroup.hidden = !show;
+    if (segmentoOutroInput) {
+      segmentoOutroInput.required = show;
+      if (show) {
+        segmentoOutroInput.focus();
+      } else {
+        segmentoOutroInput.value = '';
+      }
+    }
+  }
+
   selects.forEach(function (wrapper, wrapperIndex) {
     var trigger = wrapper.querySelector('.custom-select__trigger');
     var valueEl = wrapper.querySelector('.custom-select__value');
@@ -91,6 +107,10 @@
 
       closeDropdown();
       trigger.focus();
+
+      if (wrapper.dataset.name === 'segmento') {
+        toggleSegmentoOutro(option.dataset.value === 'Outro');
+      }
     }
 
     trigger.addEventListener('click', function () {
@@ -179,6 +199,8 @@
 
           wrapper.classList.remove('is-open', 'opens-up');
         });
+
+        toggleSegmentoOutro(false);
       }, 0);
     });
   }

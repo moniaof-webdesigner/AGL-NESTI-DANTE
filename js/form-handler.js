@@ -14,7 +14,7 @@
      a partir do Google Apps Script (veja docs/google-apps-script.md).
      --------------------------------------------------------- */
   var CONFIG = {
-    GAS_WEB_APP_URL: 'https://script.google.com/macros/s/AKfycbwfdkSUri4EzS1CXtv3cR00oLzcoMHTZQajauN7Rq6S7qf3SnKpBZSYQbgCWATtPcO3/exec'
+    GAS_WEB_APP_URL: 'https://script.google.com/macros/library/d/1yXY7bGl1wEi3ZJPtxWtAuFAKkUCc3nixTNXNcaiK5d913amq8Ta_Ys1u/2'
   };
 
   /* ---------------------------------------------------------
@@ -93,12 +93,16 @@
       return value.trim().length >= 2 ? '' : 'Informe o nome da empresa.';
     },
     cnpj: function (value) {
-      if (!value.trim()) return '';
       var digits = value.replace(/\D/g, '');
-      return digits.length === 14 ? '' : 'Informe um CNPJ válido (14 dígitos) ou deixe em branco.';
+      return digits.length === 14 ? '' : 'Informe um CNPJ válido (14 dígitos).';
     },
     segmento: function (value) {
       return value ? '' : 'Selecione o segmento da sua empresa.';
+    },
+    segmento_outro: function (value) {
+      var segmento = getFieldValue('segmento');
+      if (segmento !== 'Outro') return '';
+      return value.trim() ? '' : 'Digite o segmento da sua empresa.';
     },
     cargo: function () {
       return '';

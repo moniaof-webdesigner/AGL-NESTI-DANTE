@@ -548,7 +548,7 @@ textarea:focus-visible {
 
 .stats__grid {
   display: grid;
-  grid-template-columns: repeat(3, minmax(200px, 1fr));
+  grid-template-columns: repeat(4, minmax(180px, 1fr));
   gap: var(--space-lg);
   text-align: center;
 }
