@@ -32,8 +32,8 @@ exatamente nesta ordem:
 | H      | Segmento (Outro)    | Texto digitado quando o segmento selecionado é "Outro"   |
 | I      | Cargo               | Cargo do solicitante                                     |
 | J      | Premium/Importados  | Se já trabalha com produtos premium/importados           |
-| K      | Origem              | Como conheceu a Nesti Dante                              |
-| L      | Origem do Site      | Domínio de onde o formulário foi enviado                 |
+| K      | Como conheceu a Nesti Dante | Resposta escolhida pelo usuário no formulário     |
+| L      | Origem              | Domínio de onde o formulário foi enviado (técnico)       |
 | M      | Data Envio (ISO)    | Data/hora enviada pelo navegador (ISO 8601)              |
 | N      | UTM Source          | `utm_source` capturado da URL (ex.: `google`, `facebook`) |
 | O      | UTM Medium          | `utm_medium` capturado da URL (ex.: `cpc`, `paid-social`) |
@@ -86,8 +86,8 @@ function doPost(e) {
       params.segmento_outro || '',      // H - Segmento (Outro)
       params.cargo || '',               // I - Cargo
       params.premium || '',             // J - Premium/Importados
-      params.origem || '',              // K - Origem
-      params.origemSite || '',          // L - Origem do Site
+      params.comoConheceuNestiDante || '', // K - Como conheceu a Nesti Dante
+      params.origem || '',              // L - Origem
       params.dataEnvio || '',           // M - Data Envio (ISO, do navegador)
       params.utm_source || '',          // N - UTM Source
       params.utm_medium || '',          // O - UTM Medium

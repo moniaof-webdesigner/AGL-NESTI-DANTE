@@ -110,7 +110,7 @@
     premium: function () {
       return '';
     },
-    origem: function () {
+    comoConheceuNestiDante: function () {
       return '';
     }
   };
@@ -238,7 +238,7 @@
       payload.append(key, data[key]);
     });
     payload.append('dataEnvio', new Date().toISOString());
-    payload.append('origemSite', window.location.hostname || 'aglbrasil.com.br');
+    payload.append('origem', window.location.hostname || 'aglbrasil.com.br');
 
     return fetch(CONFIG.GAS_WEB_APP_URL, {
       method: 'POST',
