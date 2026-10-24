@@ -223,31 +223,153 @@
   });
 
   /* ---------------------------------------------------------
-     Envia os dados para o Google Sheets via Apps Script
+     Envio ao Google Apps Script (v2)
      ---------------------------------------------------------
-     Como o Apps Script Web App não retorna cabeçalhos CORS
-     completos para leitura da resposta, usamos modo "no-cors".
-     Isso significa que não conseguimos ler o corpo da resposta,
-     mas a requisição é entregue normalmente ao script, que grava
-     a linha na planilha. Tratamos a ausência de erro de rede
-     como sucesso.
+     O envio usa CORS para ler a resposta JSON do Apps Script e
+     só tratar como sucesso o que o servidor realmente confirmou
+     (status "success"). Respostas possíveis:
+       success   dados gravados na planilha
+       duplicate o MESMO conteúdo já foi enviado nas últimas 24 h
+                 ("Você já enviou seu formulário."). Quem altera qualquer
+                 informação (ex.: segmento) faz um novo envio normalmente.
+       invalid   erros de validação por campo (servidor)
+       error     falha; o usuário pode tentar de novo com o MESMO
+                 submissionId, desde que não tenha alterado os dados
+                 (o servidor não duplica a linha)
      --------------------------------------------------------- */
-  function sendToGoogleSheets(data) {
+  var REQUEST_TIMEOUT_MS = 25000;
+  var DUPLICATE_MESSAGE = 'Você já enviou seu formulário.';
+
+  var currentSubmissionId = null;
+  var currentSubmissionContent = '';
+  var isSubmitting = false;
+  var isLocked = false;
+
+  function generateSubmissionId() {
+    try {
+      if (window.crypto && typeof window.crypto.randomUUID === 'function') {
+        return window.crypto.randomUUID();
+      }
+    } catch (e) {
+      /* usa o fallback abaixo */
+    }
+    return 'sub-' + Date.now().toString(36) + '-' + Math.random().toString(36).slice(2, 12);
+  }
+
+  function readCookie(name) {
+    try {
+      var parts = document.cookie ? document.cookie.split(';') : [];
+      for (var i = 0; i < parts.length; i++) {
+        var pair = parts[i].trim();
+        if (pair.indexOf(name + '=') === 0) {
+          return pair.slice(name.length + 1);
+        }
+      }
+    } catch (e) {
+      /* cookies indisponíveis */
+    }
+    return '';
+  }
+
+  function safeDecode(value) {
+    try {
+      return decodeURIComponent(value);
+    } catch (e) {
+      return value;
+    }
+  }
+
+  /* Identificador do visitante na RD. A documentação da API cita o cookie
+     "_rdtrk" (valor simples, um UUID); o script de monitoramento da RD lê
+     "rdtrk" (JSON com o campo "id"). Aceita os dois formatos nos dois nomes. */
+  function readRdClientId() {
+    var names = ['_rdtrk', 'rdtrk'];
+
+    for (var i = 0; i < names.length; i++) {
+      var raw = safeDecode(readCookie(names[i]) || '').trim();
+      if (!raw) continue;
+
+      if (raw.charAt(0) === '{') {
+        try {
+          var parsed = JSON.parse(raw);
+          if (parsed && parsed.id) return String(parsed.id);
+        } catch (e) {
+          /* tenta o próximo cookie */
+        }
+      } else {
+        return raw;
+      }
+    }
+
+    return '';
+  }
+
+  /* Cookies do código de monitoramento da RD (somente leitura): preservam o
+     vínculo entre as visitas anônimas e o lead (histórico e origem). */
+  function getRdTracking() {
+    var clientId = '';
+    var trafficSource = '';
+
+    try {
+      clientId = readRdClientId();
+    } catch (e) {
+      clientId = '';
+    }
+
+    try {
+      trafficSource = safeDecode(readCookie('__trf.src') || '');
+    } catch (e) {
+      trafficSource = '';
+    }
+
+    return { clientId: clientId, trafficSource: trafficSource };
+  }
+
+  function sendToGoogleSheets(data, submissionId) {
     var payload = new URLSearchParams();
     Object.keys(data).forEach(function (key) {
       payload.append(key, data[key]);
     });
     payload.append('dataEnvio', new Date().toISOString());
     payload.append('origem', window.location.hostname || 'aglbrasil.com.br');
+    payload.append('submissionId', submissionId);
 
-    return fetch(CONFIG.GAS_WEB_APP_URL, {
+    var tracking = getRdTracking();
+    payload.append('rd_cid', tracking.clientId);
+    payload.append('rd_trf', tracking.trafficSource);
+
+    var controller = typeof AbortController !== 'undefined' ? new AbortController() : null;
+    var timer = controller
+      ? window.setTimeout(function () {
+          controller.abort();
+        }, REQUEST_TIMEOUT_MS)
+      : null;
+
+    var options = {
       method: 'POST',
-      mode: 'no-cors',
+      mode: 'cors',
       headers: {
         'Content-Type': 'application/x-www-form-urlencoded'
       },
       body: payload.toString()
-    });
+    };
+    if (controller) options.signal = controller.signal;
+
+    return fetch(CONFIG.GAS_WEB_APP_URL, options)
+      .then(function (response) {
+        if (!response.ok) throw new Error('http_' + response.status);
+        return response.json();
+      })
+      .then(
+        function (json) {
+          if (timer) window.clearTimeout(timer);
+          return json;
+        },
+        function (error) {
+          if (timer) window.clearTimeout(timer);
+          throw error;
+        }
+      );
   }
 
   /* ---------------------------------------------------------
@@ -255,7 +377,7 @@
      --------------------------------------------------------- */
   function setLoading(isLoading) {
     if (!submitBtn) return;
-    submitBtn.disabled = isLoading;
+    submitBtn.disabled = isLoading || isLocked;
     submitBtn.classList.toggle('btn--loading', isLoading);
   }
 
@@ -289,11 +411,73 @@
     });
   });
 
+  /* Depois de um envio confirmado o botão fica bloqueado. Ele só é
+     liberado quando alguém volta a preencher o formulário. Não há bloqueio
+     permanente por e-mail: quem precisa corrigir ou refazer uma solicitação
+     envia de novo. Repetições idênticas (mesmo conteúdo, até 24 h) são
+     barradas pelo servidor. */
+  function unlockAfterNewInput() {
+    if (!isLocked) return;
+    isLocked = false;
+    if (submitBtn && !isSubmitting) submitBtn.disabled = false;
+  }
+
+  form.addEventListener('input', unlockAfterNewInput);
+  form.addEventListener('change', unlockAfterNewInput);
+
+  function applyServerErrors(errors) {
+    Object.keys(errors || {}).forEach(function (name) {
+      if (!validators.hasOwnProperty(name)) return;
+      showFieldError(name, errors[name]);
+    });
+
+    setFeedback('Por favor, corrija os campos destacados antes de enviar.', true);
+
+    var firstInvalid = form.querySelector('.is-invalid, .form__radio.is-invalid input');
+    if (firstInvalid) firstInvalid.focus();
+  }
+
+  function finishSubmission() {
+    form.reset();
+    fillUTMFields(form);
+    showSuccessStep();
+  }
+
+  function handleServerResponse(response) {
+    var status = response && response.status;
+
+    if (status === 'success') {
+      currentSubmissionId = null;
+      currentSubmissionContent = '';
+      isLocked = true;
+      finishSubmission();
+      return;
+    }
+
+    if (status === 'duplicate') {
+      currentSubmissionId = null;
+      currentSubmissionContent = '';
+      setFeedback(DUPLICATE_MESSAGE, true);
+      return;
+    }
+
+    if (status === 'invalid') {
+      applyServerErrors(response.errors);
+      return;
+    }
+
+    throw new Error('server_error');
+  }
+
   /* ---------------------------------------------------------
      Submissão do formulário
      --------------------------------------------------------- */
   form.addEventListener('submit', function (event) {
     event.preventDefault();
+
+    // Protege contra duplo clique/Enter e contra reenvio logo após o sucesso
+    if (isSubmitting || isLocked) return;
+
     setFeedback('', false);
 
     var result = validateForm();
@@ -316,21 +500,26 @@
 
     var gasConfigured = CONFIG.GAS_WEB_APP_URL && CONFIG.GAS_WEB_APP_URL.indexOf('COLE_AQUI') !== 0;
 
-    function finishSubmission() {
-      form.reset();
-      fillUTMFields(form);
-      showSuccessStep();
-    }
-
     if (!gasConfigured) {
       finishSubmission();
       return;
     }
 
+    isSubmitting = true;
     setLoading(true);
 
-    sendToGoogleSheets(result.data)
-      .then(finishSubmission)
+    // O mesmo ID é reutilizado nas novas tentativas após falha de rede, mas só
+    // se os dados não mudaram: dados alterados são um novo envio (novo ID).
+    var content = JSON.stringify(result.data);
+    if (!currentSubmissionId || content !== currentSubmissionContent) {
+      currentSubmissionId = generateSubmissionId();
+      currentSubmissionContent = content;
+    }
+
+    sendToGoogleSheets(result.data, currentSubmissionId)
+      .then(function (response) {
+        handleServerResponse(response);
+      })
       .catch(function () {
         setFeedback(
           'Não foi possível enviar seus dados agora. Verifique sua conexão e tente novamente.',
@@ -338,6 +527,7 @@
         );
       })
       .finally(function () {
+        isSubmitting = false;
         setLoading(false);
       });
   });

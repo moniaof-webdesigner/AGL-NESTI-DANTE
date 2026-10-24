@@ -16,7 +16,7 @@ compartilhada comum.
 │   └── responsive.css   # Media queries (mobile-first)
 ├── js/
 │   ├── main.js          # Navegação, modal, animações de entrada
-│   └── form-handler.js  # Validação, envio Google Sheets + WhatsApp
+│   └── form-handler.js  # Validação e envio ao Apps Script (Sheets + RD)
 ├── assets/
 │   ├── images/          # Imagens de seção (ex.: bg-hero-agl.avif)
 │   ├── icons/           # Ícones SVG/PNG
@@ -30,14 +30,13 @@ compartilhada comum.
 
 1. Faça upload de todos os arquivos e pastas para a raiz do seu domínio
    (ex.: `public_html/`).
-2. Configure a integração com Google Sheets + WhatsApp seguindo o guia em
+2. Configure a integração com Google Sheets + RD Station seguindo o guia em
    [`docs/google-apps-script.md`](docs/google-apps-script.md).
 3. Atualize em `index.html`:
    - Links de WhatsApp (`https://wa.me/55...`) no rodapé.
    - URL canônica e meta tags Open Graph (`https://aglbrasil.com.br/`).
 4. Atualize em `js/form-handler.js`:
    - `CONFIG.GAS_WEB_APP_URL` com a URL do Web App do Apps Script.
-   - `CONFIG.WHATSAPP_NUMBER` com o número do WhatsApp Comercial.
 
 ## Formulário de Parceria Comercial
 
@@ -47,11 +46,13 @@ atributo `data-open-modal` (botões do header, hero, CTA final e rodapé).
 
 Ao enviar com sucesso:
 
-1. Os dados são gravados em uma nova linha da planilha Google Sheets via
-   Google Apps Script.
-2. É exibida uma mensagem de sucesso dentro do modal.
-3. O WhatsApp Comercial é aberto automaticamente em uma nova aba, com uma
-   mensagem pré-formatada contendo todos os dados preenchidos.
+1. O Apps Script valida, grava uma nova linha na planilha Google Sheets e
+   confirma ao site (o site só mostra sucesso após essa confirmação).
+2. Depois da gravação, o Apps Script registra a conversão `partnershipForm` na
+   RD Station pela API oficial (ver `docs/google-apps-script.md`).
+3. É exibida uma mensagem de sucesso dentro do modal. Repetir exatamente o mesmo
+   preenchimento em até 24 h mostra "Você já enviou seu formulário."; quem
+   altera qualquer informação (por exemplo o segmento) envia normalmente.
 
 ## Boas práticas aplicadas
 

@@ -1,0 +1,11 @@
+{
+  "name": "agl-form-tests",
+  "private": true,
+  "description": "Testes locais do formulário de parceria (não são publicados no site)",
+  "scripts": {
+    "test": "node --test"
+  },
+  "devDependencies": {
+    "jsdom": "^26.1.0"
+  }
+}

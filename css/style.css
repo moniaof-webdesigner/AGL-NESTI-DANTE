@@ -1590,6 +1590,7 @@ textarea:focus-visible {
   color: #4a4730;
   max-width: 480px;
   margin: 0 auto var(--space-sm);
+  text-wrap: balance;
 }
 
 .success__hint {
@@ -1597,6 +1598,7 @@ textarea:focus-visible {
   color: var(--color-primary);
   font-weight: 600;
   margin-bottom: var(--space-lg);
+  text-wrap: balance;
 }
 
 /* ---------------------------------------------------------
